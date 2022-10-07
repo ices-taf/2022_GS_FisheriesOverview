@@ -9,7 +9,7 @@ library(tidyr)
 source("bootstrap/utilities.r")
 
 # set values for automatic naming of files:
-cap_year <- 2021
+cap_year <- 2022
 cap_month <- "October"
 ecoreg_code <- "GS"
 
@@ -65,11 +65,11 @@ catch_dat <- catch_dat %>% filter(COMMON_NAME != "Blue whiting")
 
 
 plot_catch_trends(catch_dat, type = "COMMON_NAME", line_count = 6, plot_type = "line")
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"Catches_species", ext = "png"), path = "report/", width = 200, height = 130.5, units = "mm", dpi = 300)
+ggplot2::ggsave(paste0(cap_year, "_", ecoreg,"_FO_Catches_species.png"), path = "report/", width = 170, height = 100.5, units = "mm", dpi = 300)
 
 #data
 dat <- plot_catch_trends(catch_dat, type = "COMMON_NAME", line_count = 9, plot_type = "line", return_data = TRUE)
-write.taf(dat, file_name(cap_year,ecoreg_code,"Catches_species", ext = "csv"), dir = "report")
+write.taf(dat, paste0(cap_year, "_", ecoreg,"_FO_Catches_species.csv"), dir = "report")
 
 
 #~~~~~~~~~~~~~~~#
@@ -78,11 +78,11 @@ write.taf(dat, file_name(cap_year,ecoreg_code,"Catches_species", ext = "csv"), d
 catch_dat$COUNTRY[which(catch_dat$COUNTRY == "Russian Federation")] <- "Russia"
 #Plot
 plot_catch_trends(catch_dat, type = "COUNTRY", line_count = 6, plot_type = "area")
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"Catches_country", ext = "png"), path = "report/", width = 200, height = 130.5, units = "mm", dpi = 300)
+ggplot2::ggsave(paste0(cap_year, "_", ecoreg,"_FO_Catches_country.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
 
 #data
 dat <- plot_catch_trends(catch_dat, type = "COUNTRY", line_count = 10, plot_type = "area", return_data = TRUE)
-write.taf(dat, file= file_name(cap_year,ecoreg_code,"Catches_country", ext = "csv"), dir = "report")
+write.taf(dat, file= paste0(cap_year, "_", ecoreg,"_FO_Catches_country.csv"), dir = "report")
 
 #~~~~~~~~~~~~~~~#
 # By guild
@@ -97,8 +97,8 @@ unique(check$COMMON_NAME)
 #need to work a bit on this
 
 
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"Catches_guild", ext = "png"), path = "report/", width = 200, height = 130.5, units = "mm", dpi = 300)
+ggplot2::ggsave(paste0(cap_year, "_", ecoreg,"_FO_Catches_guild.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
 
 #data
 dat <- plot_catch_trends(catch_dat, type = "GUILD", line_count = 5, plot_type = "line", return_data = TRUE)
-write.taf(dat, file= file_name(cap_year,ecoreg_code,"Catches_guild", ext = "csv"), dir = "report")
+write.taf(dat, file= paste0(cap_year, "_", ecoreg,"_FO_Catches_guild.csv"), dir = "report")
