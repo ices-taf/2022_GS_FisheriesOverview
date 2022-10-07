@@ -47,8 +47,9 @@ sag_sum <- read.taf("bootstrap/initial/data/SAG_data/SAG_summary.csv")
 sag_refpts <- read.taf("bootstrap/initial/data/SAG_data/SAG_refpts.csv")
 sag_status <- read.taf("bootstrap/initial/data/SAG_data/SAG_status.csv")
 
-clean_sag <- format_sag(summary, refpts, 2021, "Greenland")
-clean_status <- format_sag_status(sag_status, 2021, "Greenland")
+# clean_sag <- format_sag(summary, refpts, 2021, "Greenland")
+clean_sag <- format_sag(sag_complete, sid)
+clean_status <- format_sag_status(status, 2022, "Greenland Sea")
 
 # list of stocks
 GS_stocks <-  c("aru.27.5a14",
@@ -71,5 +72,5 @@ GS_stocks <-  c("aru.27.5a14",
 clean_sag <- dplyr::filter(clean_sag, StockKeyLabel %in% GS_stocks)
 clean_status <- dplyr::filter(clean_status, StockKeyLabel %in% GS_stocks)
              
-write.taf(clean_sag, dir = "data")
+write.taf(clean_sag, dir = "data", quote = TRUE)
 write.taf(clean_status, dir = "data", quote = TRUE)
