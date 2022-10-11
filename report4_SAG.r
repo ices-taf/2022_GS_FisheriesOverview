@@ -248,10 +248,10 @@ write.taf(dat, file= file_name(cap_year,ecoreg_code,"SAG_ICESpies", ext = "csv",
 #~~~~~~~~~~~~~~~#
 #Need to change order and fix numbers
 plot_GES_pies(clean_status, catch_current,  cap_month,cap_year)
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_GESpies", ext = "png"), path = "report/", width = 178, height = 178, units = "mm", dpi = 300)
+ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_GESpies", ext = "png", dir = "report"), width = 178, height = 178, units = "mm", dpi = 300)
 
 dat <- plot_GES_pies(clean_status, catch_current, cap_month,cap_year, return_data = TRUE)
-write.taf(dat, file= file_name(cap_year,ecoreg_code,"SAG_GESpies", ext = "csv"), dir = "report")
+write.taf(dat, file= file_name(cap_year,ecoreg_code,"SAG_GESpies", ext = "csv", dir = "report"))
 
 #~~~~~~~~~~~~~~~#
 #F. ANNEX TABLE 

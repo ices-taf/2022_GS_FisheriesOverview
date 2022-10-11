@@ -9,7 +9,7 @@ library(tidyr)
 source("bootstrap/utilities.r")
 
 # set values for automatic naming of files:
-cap_year <- 2021
+cap_year <- 2022
 cap_month <- "October"
 ecoreg_code <- "GS"
 
