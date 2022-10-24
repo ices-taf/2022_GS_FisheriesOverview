@@ -1,11 +1,9 @@
 library(icesFO)
 
 
-summary <- load_sag_summary(2021)
-write.taf(summary, file = "SAG_summary.csv")
+out <- load_sag(2022, "Greenland Sea")
 
-refpts <- load_sag_refpts(2021)
-write.taf(refpts, file = "SAG_refpts.csv")
+sag_complete <- out
 
-status <- load_sag_status(2021)
+status <- load_sag_status(2022)
 write.taf(status, file = "SAG_status.csv", quote = TRUE)

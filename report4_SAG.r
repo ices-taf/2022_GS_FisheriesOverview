@@ -39,7 +39,7 @@ plot_stock_trends(trends, guild="demersal", cap_year , cap_month , return_data =
 ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_Trends_demersal", ext = "png", dir = "report"), width = 178, height = 130, units = "mm", dpi = 300)
 
 dat <- plot_stock_trends(trends, guild="demersal", cap_year , cap_month , return_data = TRUE)
-write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Trends_demersal", ext = "csv"), dir = "report")
+write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Trends_demersal", ext = "csv", dir = "report"))
 
 # 2. Pelagic
 #~~~~~~~~~~~
@@ -53,11 +53,11 @@ unique(trends$FisheriesGuild)
 
 # 3. Crustacean
 #~~~~~~~~~~~
-plot_stock_trends(trends, guild="crustacean", cap_year , cap_month ,return_data = FALSE )
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_Trends_crustacean", ext = "png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
-
-dat <- plot_stock_trends(trends, guild="crustacean", cap_year , cap_month , return_data = TRUE)
-write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Trends_crustacean", ext = "csv"), dir = "report" )
+# plot_stock_trends(trends, guild="crustacean", cap_year , cap_month ,return_data = FALSE )
+# ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_Trends_crustacean", ext = "png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+# 
+# dat <- plot_stock_trends(trends, guild="crustacean", cap_year , cap_month , return_data = TRUE)
+# write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Trends_crustacean", ext = "csv"), dir = "report" )
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -175,11 +175,11 @@ bar <- plot_CLD_bar(catch_current, guild = "All", caption = T, cap_year , cap_mo
 bar_dat <- plot_CLD_bar(catch_current, guild = "All", caption = T, cap_year , cap_month , return_data = TRUE)
 write.taf(bar_dat, file =file_name(cap_year,ecoreg_code,"SAG_Current_all", ext = "csv", dir = "report" ))
 
-# top_10 <- bar_dat %>% top_n(10, total)
-# bar <- plot_CLD_bar(top_10, guild = "All", caption = TRUE, cap_year = 2020, cap_month = "September", return_data = FALSE)
+top_10 <- bar_dat %>% top_n(10, total)
+bar <- plot_CLD_bar(top_10, guild = "All", caption = TRUE, cap_year = 2020, cap_month = "September", return_data = FALSE)
 
 # top_10 <- unique(top_10)
-kobe <- plot_kobe(catch_current, guild = "All", caption = T, cap_year, cap_month , return_data = FALSE)
+kobe <- plot_kobe(top_n, guild = "All", caption = T, cap_year, cap_month , return_data = FALSE)
 png(file_name(cap_year,ecoreg_code,"SAG_Current_all", ext = "png", dir = "report"),
     width = 137.32,
     height = 88.9,
@@ -187,7 +187,7 @@ png(file_name(cap_year,ecoreg_code,"SAG_Current_all", ext = "png", dir = "report
     res = 300)
 p1_plot<-gridExtra::grid.arrange(kobe,
                                  bar, ncol = 2,
-                                 respect = TRUE, top = "All stocks")
+                                 respect = TRUE, top = "All stocks top 10")
 dev.off()
 
 
@@ -232,12 +232,15 @@ ggplot2::ggsave(file_name(cap_year,ecoreg_code,"_FO_SAG_Discards", ext = "png"),
 plot_status_prop_pies(clean_status, cap_month,cap_year)
 
 # will make qual_green just green
-# unique(clean_status$StockSize)
+unique(clean_status$StockSize)
  
-# clean_status$StockSize <- gsub("qual_RED", "RED", clean_status$StockSize)
+# clean_status$StockSize <- gsub("qual_GREEN", "GREEN", clean_status$StockSize)
 
+unique(clean_status$FishingPressure)
+
+# clean_status$FishingPressure <- gsub("qual_RED", "RED", clean_status$FishingPressure)
 # plot_status_prop_pies(clean_status, "September", "2019")
-
+plot_status_prop_pies(clean_status, cap_month,cap_year)
 ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_ICESpies", ext = "png", dir = "report"), width = 178, height = 178, units = "mm", dpi = 300)
 
 dat <- plot_status_prop_pies(clean_status, cap_month,cap_year, return_data = TRUE)
@@ -248,10 +251,10 @@ write.taf(dat, file= file_name(cap_year,ecoreg_code,"SAG_ICESpies", ext = "csv",
 #~~~~~~~~~~~~~~~#
 #Need to change order and fix numbers
 plot_GES_pies(clean_status, catch_current,  cap_month,cap_year)
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_GESpies", ext = "png"), path = "report/", width = 178, height = 178, units = "mm", dpi = 300)
+ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_GESpies", ext = "png", dir = "report"), width = 178, height = 178, units = "mm", dpi = 300)
 
 dat <- plot_GES_pies(clean_status, catch_current, cap_month,cap_year, return_data = TRUE)
-write.taf(dat, file= file_name(cap_year,ecoreg_code,"SAG_GESpies", ext = "csv"), dir = "report")
+write.taf(dat, file= file_name(cap_year,ecoreg_code,"SAG_GESpies", ext = "csv", dir = "report"))
 
 #~~~~~~~~~~~~~~~#
 #F. ANNEX TABLE 
