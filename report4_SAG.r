@@ -179,7 +179,7 @@ top_10 <- bar_dat %>% top_n(10, total)
 bar <- plot_CLD_bar(top_10, guild = "All", caption = TRUE, cap_year = 2020, cap_month = "September", return_data = FALSE)
 
 # top_10 <- unique(top_10)
-kobe <- plot_kobe(top_n, guild = "All", caption = T, cap_year, cap_month , return_data = FALSE)
+kobe <- plot_kobe(top_10, guild = "All", caption = T, cap_year, cap_month , return_data = FALSE)
 png(file_name(cap_year,ecoreg_code,"SAG_Current_all", ext = "png", dir = "report"),
     width = 137.32,
     height = 88.9,
@@ -198,21 +198,21 @@ dev.off()
 # No discards at all        
         
                 
-discardsA <- plot_discard_trends(catch_trends, 2022, cap_year , cap_month )
-
-dat <- plot_discard_trends(catch_trends, 2022, cap_year , cap_month , return_data = TRUE)
-write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Discards_trends", ext = "csv", dir = "report" ))
-
-catch_trends2 <- catch_trends %>% filter(discards > 0)
-discardsB <- plot_discard_current(catch_trends3, year,position_letter = "b)", cap_year , cap_month , caption = FALSE)
-
-discardsC <- plot_discard_current(catch_trends, 2021,position_letter = "c)", cap_year, cap_month )
-
-dat <- plot_discard_current(catch_trends, 2021, cap_year, cap_month , return_data = TRUE)
-write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Discards_current", ext = "csv"), dir = "report" )
-
-cowplot::plot_grid(discardsA, discardsC, align = "h", nrow = 1, rel_widths = 1, rel_heights = 1)
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"_FO_SAG_Discards", ext = "png"), path = "report/", width = 220.32, height = 88.9, units = "mm", dpi = 300)
+# discardsA <- plot_discard_trends(catch_trends, 2022, cap_year , cap_month )
+# 
+# dat <- plot_discard_trends(catch_trends, 2022, cap_year , cap_month , return_data = TRUE)
+# write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Discards_trends", ext = "csv", dir = "report" ))
+# 
+# catch_trends2 <- catch_trends %>% filter(discards > 0)
+# discardsB <- plot_discard_current(catch_trends3, year,position_letter = "b)", cap_year , cap_month , caption = FALSE)
+# 
+# discardsC <- plot_discard_current(catch_trends, 2021,position_letter = "c)", cap_year, cap_month )
+# 
+# dat <- plot_discard_current(catch_trends, 2021, cap_year, cap_month , return_data = TRUE)
+# write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Discards_current", ext = "csv"), dir = "report" )
+# 
+# cowplot::plot_grid(discardsA, discardsC, align = "h", nrow = 1, rel_widths = 1, rel_heights = 1)
+# ggplot2::ggsave(file_name(cap_year,ecoreg_code,"_FO_SAG_Discards", ext = "png"), path = "report/", width = 220.32, height = 88.9, units = "mm", dpi = 300)
 
 
 # png("report/2019_BI_FO_Figure7.png",
@@ -234,11 +234,11 @@ plot_status_prop_pies(clean_status, cap_month,cap_year)
 # will make qual_green just green
 unique(clean_status$StockSize)
  
-# clean_status$StockSize <- gsub("qual_GREEN", "GREEN", clean_status$StockSize)
+clean_status$StockSize <- gsub("qual_GREEN", "GREEN", clean_status$StockSize)
 
 unique(clean_status$FishingPressure)
 
-# clean_status$FishingPressure <- gsub("qual_RED", "RED", clean_status$FishingPressure)
+clean_status$FishingPressure <- gsub("qual_RED", "RED", clean_status$FishingPressure)
 # plot_status_prop_pies(clean_status, "September", "2019")
 plot_status_prop_pies(clean_status, cap_month,cap_year)
 ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_ICESpies", ext = "png", dir = "report"), width = 178, height = 178, units = "mm", dpi = 300)

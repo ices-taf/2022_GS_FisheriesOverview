@@ -19,7 +19,7 @@ prelim <- read.taf("bootstrap/initial/data/ICES_nominal_catches/ICES_preliminary
 
 catch_dat <- 
   format_catches(2022, "Greenland Sea", 
-    hist, official, prelim, species_list, sid)
+    hist, official, NULL, species_list, sid)
 
 write.taf(catch_dat, dir = "data", quote = TRUE)
 
