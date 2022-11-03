@@ -77,7 +77,7 @@ trends3 <- trends2%>% filter(Metric == "F_FMSY")
 plot_guild_trends(trends3, cap_year, cap_month,return_data = FALSE )
 # guild2 <- guild2 %>% filter(FisheriesGuild != "MEAN")
 # plot_guild_trends(guild2, cap_year , cap_month,return_data = FALSE )
-ggplot2::ggsave(paste0(year_cap, "_", ecoreg_code, "_EO_SAG_GuildTrends_F.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+ggplot2::ggsave(paste0(cap_year, "_", ecoreg_code, "_EO_SAG_GuildTrends_F.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
 # ggplot2::ggsave("2019_BtS_EO_GuildTrends_noMEAN_F.png", path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
 
 
@@ -87,11 +87,11 @@ trends3 <- trends2%>% filter(Metric == "SSB_MSYBtrigger")
 # guild3 <- guild2 %>% dplyr::filter(FisheriesGuild != "MEAN")
 trends3 <- trends3 %>% filter(Year > 1960)
 plot_guild_trends(trends3, cap_year, cap_month,return_data = FALSE )
-ggplot2::ggsave(paste0(year_cap, "_", ecoreg_code, "_EO_SAG_GuildTrends_SSB_1960.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+ggplot2::ggsave(paste0(cap_year, "_", ecoreg_code, "_EO_SAG_GuildTrends_SSB_1960.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
 # ggplot2::ggsave(paste0(year_cap, "_", ecoreg, "_EO_SAG_GuildTrends_SSB_1900.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
 
 dat <- plot_guild_trends(trends2, cap_year, cap_month ,return_data = TRUE)
-write.taf(dat, file =paste0(year_cap, "_", ecoreg_code, "_EO_SAG_GuildTrends.csv"), dir = "report" )
+write.taf(dat, file =paste0(cap_year, "_", ecoreg_code, "_EO_SAG_GuildTrends.csv"), dir = "report" )
 
 # dat <- trends2[,1:2]
 # dat <- unique(dat)
