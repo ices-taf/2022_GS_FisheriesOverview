@@ -65,14 +65,20 @@ unique(trends$FisheriesGuild)
 #~~~~~~~~~~~~~~~~~~~~~~~~~#
 guild <- read.taf("model/guild.csv")
 
-trends2 <- trends%>% filter (StockKeyLabel %in% c("cod.2127.1f14",
-                                                  "ghl.27.561214",
-                                                  "mac.27.nea",
-                                                  "her.27.1-24a514a",
-                                                  "reg.27.561214"))
+trends2 <- trends %>% filter (StockKeyLabel %in% c("aru.27.5a14",
+                                                    # "bli.27.5a14",
+                                                    # "cod.2127.1f14",
+                                                    # "ghl.27.561214",
+                                                    "her.27.1-24a514a",
+                                                    "mac.27.nea",
+                                                    "reb.2127.dp"
+                                                    # "reg.27.561214",
+                                                    # "usk.27.5a14"
+                                                    ))
 trends2 <- trends2 [,-1]
 colnames(trends2) <- c("FisheriesGuild", "Year", "Metric", "Value")
 trends3 <- trends2%>% filter(Metric == "F_FMSY")
+trends3 <- trends3 %>% filter(Year > 1960)
 # guild2 <- guild %>% filter(Metric == "F_FMSY")
 plot_guild_trends(trends3, cap_year, cap_month,return_data = FALSE )
 # guild2 <- guild2 %>% filter(FisheriesGuild != "MEAN")
@@ -81,7 +87,7 @@ ggplot2::ggsave(paste0(cap_year, "_", ecoreg_code, "_EO_SAG_GuildTrends_F.png"),
 # ggplot2::ggsave("2019_BtS_EO_GuildTrends_noMEAN_F.png", path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
 
 
-trends3 <- trends2%>% filter(Metric == "SSB_MSYBtrigger")
+trends3 <- trends2 %>% filter(Metric == "SSB_MSYBtrigger")
 
 # guild2 <- guild %>% filter(Metric == "SSB_MSYBtrigger")
 # guild3 <- guild2 %>% dplyr::filter(FisheriesGuild != "MEAN")
@@ -262,6 +268,8 @@ write.taf(dat, file= file_name(cap_year,ecoreg_code,"SAG_GESpies", ext = "csv", 
 
 
 dat <- format_annex_table(clean_status, 2022)
+
+dat <- read.taf("report/2022_GS_FO_annex_table.csv")
 format_annex_table_html(dat,ecoreg_code,cap_year)
 
 write.taf(dat, file = file_name(cap_year,ecoreg_code,"annex_table", ext = "csv", dir = "report"), quote=TRUE)
